@@ -2,16 +2,12 @@
 
 ## Running the Models
 
-### Activate the Environment
-
-Replace `XXX` with the appropriate path on your machine.
+### Get the Code
 
 ```bash
-conda activate XXX/torch1
-cd XXX/ppred_release
+git clone https://github.com/pengyaping21-gif/pPred-GNN.git
+cd pPred-GNN
 ```
-
-Run all commands below from the project root. To run on a CPU, replace `--device cuda:0` with `--device cpu`.
 
 ### Download the Checkpoints
 
@@ -27,10 +23,54 @@ curl -fL --retry 3 \
   -o .cache/checkpoints/ppred-checkpoints-v0.2.0.tar.gz.sha256
 (cd .cache/checkpoints && sha256sum -c ppred-checkpoints-v0.2.0.tar.gz.sha256)
 tar -xzf .cache/checkpoints/ppred-checkpoints-v0.2.0.tar.gz
-python scripts/verify_bundle.py
 ```
 
 The three weights will be available at `checkpoints/single_rt.pth`, `checkpoints/crosslink_rt.pth`, and `checkpoints/ms2.pth`.
+
+### Run with Docker (Recommended)
+
+Clone the repository on a Linux x86_64 host, enter its root directory, and download the checkpoints above first. The complete `torch1` image includes Python 3.8, PyTorch 2.4.0 + CUDA 12.1, PyG 2.6.1, RDKit 2024.3.5, and the remaining dependencies from the original environment. GPU execution requires an NVIDIA host driver and the [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
+
+Download the complete image from the [torch1 runtime Release](https://github.com/pengyaping21-gif/pPred-GNN/releases/tag/torch1-runtime-20261116). The script verifies and joins the parts:
+
+```bash
+bash scripts/download_runtime.sh docker
+docker load -i .cache/runtime/ppred-torch1-linux-amd64.docker.tar
+
+# Enter the container; /app and all outputs map to the host project directory.
+docker run --rm -it --gpus all \
+  --user "$(id -u):$(id -g)" \
+  -v "$PWD:/app" -w /app ppred-gnn:torch1 bash
+
+# Run inside the container.
+python scripts/verify_bundle.py
+```
+
+For CPU execution, remove `--gpus all` and use `--device cpu` below. Checkpoints, data, and `outputs/` persist in the host project directory after the container exits. Run the download script with Bash and allow at least 25 GB for downloading, joining, and importing the image.
+
+To rebuild the image with the current source, run from the host project root:
+
+```bash
+bash scripts/download_runtime.sh conda
+docker buildx build --platform linux/amd64 \
+  --build-context torch1_snapshot=.cache/runtime \
+  --load -t ppred-gnn:torch1 .
+```
+
+### Run with Conda (Optional)
+
+If the environment is already installed, use `conda activate XXX/torch1`. To restore the complete backup on a Linux x86_64 host, run from the project root:
+
+```bash
+bash scripts/download_runtime.sh conda
+mkdir -p .cache/envs/torch1
+tar -xzf .cache/runtime/torch1-conda-linux-amd64.tar.gz -C .cache/envs/torch1
+.cache/envs/torch1/bin/python .cache/envs/torch1/bin/conda-unpack
+source .cache/envs/torch1/bin/activate
+python scripts/verify_bundle.py
+```
+
+Keep the restored environment at the same path after running `conda-unpack`; extract the archive again to use a different path. Run the remaining commands from the project root in the active environment. Use `--device cpu` if no GPU is available.
 
 ### Run the Demo
 

@@ -2,14 +2,12 @@
 
 ## 模型运行
 
-### 启动环境
+### 获取代码
 
 ```bash
-conda activate XXX/torch1
-cd XXX/ppred_release
+git clone https://github.com/pengyaping21-gif/pPred-GNN.git
+cd pPred-GNN
 ```
-
-下列命令均在项目根目录执行。没有 GPU 时，将 `--device cuda:0` 改为 `--device cpu`。
 
 ### 下载 checkpoint
 
@@ -25,10 +23,54 @@ curl -fL --retry 3 \
   -o .cache/checkpoints/ppred-checkpoints-v0.2.0.tar.gz.sha256
 (cd .cache/checkpoints && sha256sum -c ppred-checkpoints-v0.2.0.tar.gz.sha256)
 tar -xzf .cache/checkpoints/ppred-checkpoints-v0.2.0.tar.gz
-python scripts/verify_bundle.py
 ```
 
 解压后，三份权重位于 `checkpoints/single_rt.pth`、`checkpoints/crosslink_rt.pth` 和 `checkpoints/ms2.pth`。
+
+### Docker 启动（推荐）
+
+在 Linux x86_64 主机克隆仓库，进入项目根目录，先完成上面的权重下载。完整 `torch1` 镜像包含 Python 3.8、PyTorch 2.4.0 + CUDA 12.1、PyG 2.6.1、RDKit 2024.3.5 及原环境的其余依赖。GPU 运行需要主机安装 NVIDIA 驱动和 [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)。
+
+从 [torch1 runtime Release](https://github.com/pengyaping21-gif/pPred-GNN/releases/tag/torch1-runtime-20261116) 下载完整镜像；脚本会校验分卷并合并：
+
+```bash
+bash scripts/download_runtime.sh docker
+docker load -i .cache/runtime/ppred-torch1-linux-amd64.docker.tar
+
+# 进入容器，当前项目目录映射到 /app，输出直接保存在主机项目目录
+docker run --rm -it --gpus all \
+  --user "$(id -u):$(id -g)" \
+  -v "$PWD:/app" -w /app ppred-gnn:torch1 bash
+
+# 以下命令在容器中执行
+python scripts/verify_bundle.py
+```
+
+没有 GPU 时，删除 `--gpus all`，后续命令使用 `--device cpu`。退出容器后，权重、数据和 `outputs/` 仍保存在主机项目目录。请使用 Bash 执行下载脚本；下载、合并和镜像导入建议预留至少 25 GB 空间。
+
+需要用当前代码重新构建镜像时，在主机项目根目录执行：
+
+```bash
+bash scripts/download_runtime.sh conda
+docker buildx build --platform linux/amd64 \
+  --build-context torch1_snapshot=.cache/runtime \
+  --load -t ppred-gnn:torch1 .
+```
+
+### Conda 启动（可选）
+
+已有环境可直接使用 `conda activate XXX/torch1`。需要从完整备份恢复时，在 Linux x86_64 主机项目根目录执行：
+
+```bash
+bash scripts/download_runtime.sh conda
+mkdir -p .cache/envs/torch1
+tar -xzf .cache/runtime/torch1-conda-linux-amd64.tar.gz -C .cache/envs/torch1
+.cache/envs/torch1/bin/python .cache/envs/torch1/bin/conda-unpack
+source .cache/envs/torch1/bin/activate
+python scripts/verify_bundle.py
+```
+
+解压后的环境完成 `conda-unpack` 后，请勿再次移动；需要换路径时重新从压缩包解压。下列命令均在已启动环境的项目根目录执行；没有 GPU 时使用 `--device cpu`。
 
 ### 一键运行 demo
 
