@@ -1,4 +1,4 @@
-"""Resolve bundled weights with a pinned checksum and a portable path."""
+"""Resolve Release checkpoints with a pinned checksum and a portable path."""
 import json
 from pathlib import Path
 
@@ -20,7 +20,9 @@ def bundled_checkpoint(task, root=None):
     if root.resolve() not in path.parents:
         raise ValueError('Checkpoint manifest path must stay inside the bundle')
     if not path.is_file():
-        raise ValueError('Bundled weights are missing: ' + str(path) + '; use --checkpoint PATH')
+        raise ValueError('Checkpoint is missing: ' + str(path) + '. Download and extract the checkpoint archive from '
+                         'https://github.com/pengyaping21-gif/pPred-GNN/releases/tag/v0.2.0 '
+                         'in the project root, or use --checkpoint PATH')
     actual = fingerprint(path)
     if actual['bytes'] != entry['bytes'] or actual['sha256'] != entry['sha256']:
         raise ValueError('Bundled checkpoint checksum mismatch: ' + str(path))

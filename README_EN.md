@@ -13,6 +13,25 @@ cd XXX/ppred_release
 
 Run all commands below from the project root. To run on a CPU, replace `--device cuda:0` with `--device cpu`.
 
+### Download the Checkpoints
+
+Before the first run, download the checkpoint archive from the [v0.2.0 Release](https://github.com/pengyaping21-gif/pPred-GNN/releases/tag/v0.2.0) and extract it from the project root:
+
+```bash
+mkdir -p .cache/checkpoints
+curl -fL --retry 3 \
+  https://github.com/pengyaping21-gif/pPred-GNN/releases/download/v0.2.0/ppred-checkpoints-v0.2.0.tar.gz \
+  -o .cache/checkpoints/ppred-checkpoints-v0.2.0.tar.gz
+curl -fL --retry 3 \
+  https://github.com/pengyaping21-gif/pPred-GNN/releases/download/v0.2.0/ppred-checkpoints-v0.2.0.tar.gz.sha256 \
+  -o .cache/checkpoints/ppred-checkpoints-v0.2.0.tar.gz.sha256
+(cd .cache/checkpoints && sha256sum -c ppred-checkpoints-v0.2.0.tar.gz.sha256)
+tar -xzf .cache/checkpoints/ppred-checkpoints-v0.2.0.tar.gz
+python scripts/verify_bundle.py
+```
+
+The three weights will be available at `checkpoints/single_rt.pth`, `checkpoints/crosslink_rt.pth`, and `checkpoints/ms2.pth`.
+
 ### Run the Demo
 
 ```bash

@@ -11,6 +11,25 @@ cd XXX/ppred_release
 
 下列命令均在项目根目录执行。没有 GPU 时，将 `--device cuda:0` 改为 `--device cpu`。
 
+### 下载 checkpoint
+
+首次运行前，从 [v0.2.0 Release](https://github.com/pengyaping21-gif/pPred-GNN/releases/tag/v0.2.0) 下载权重包，并在项目根目录解压：
+
+```bash
+mkdir -p .cache/checkpoints
+curl -fL --retry 3 \
+  https://github.com/pengyaping21-gif/pPred-GNN/releases/download/v0.2.0/ppred-checkpoints-v0.2.0.tar.gz \
+  -o .cache/checkpoints/ppred-checkpoints-v0.2.0.tar.gz
+curl -fL --retry 3 \
+  https://github.com/pengyaping21-gif/pPred-GNN/releases/download/v0.2.0/ppred-checkpoints-v0.2.0.tar.gz.sha256 \
+  -o .cache/checkpoints/ppred-checkpoints-v0.2.0.tar.gz.sha256
+(cd .cache/checkpoints && sha256sum -c ppred-checkpoints-v0.2.0.tar.gz.sha256)
+tar -xzf .cache/checkpoints/ppred-checkpoints-v0.2.0.tar.gz
+python scripts/verify_bundle.py
+```
+
+解压后，三份权重位于 `checkpoints/single_rt.pth`、`checkpoints/crosslink_rt.pth` 和 `checkpoints/ms2.pth`。
+
 ### 一键运行 demo
 
 ```bash

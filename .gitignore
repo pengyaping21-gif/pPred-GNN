@@ -21,6 +21,3 @@ Thumbs.db
 *.log
 *.pt
 *.pth
-!checkpoints/single_rt.pth
-!checkpoints/crosslink_rt.pth
-!checkpoints/ms2.pth
