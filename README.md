@@ -1,5 +1,7 @@
 # pPred 使用说明
 
+[简体中文](README.md) | [English](README_EN.md)
+
 ## 模型运行
 
 ### 获取代码
