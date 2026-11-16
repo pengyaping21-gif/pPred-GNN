@@ -1,0 +1,357 @@
+{
+  "seed": 2024,
+  "selection": "one record per peptide group, sampled within each fixed source split",
+  "tasks": {
+    "single_rt": {
+      "splits": {
+        "train": {
+          "records": 32,
+          "peptide_groups": 32
+        },
+        "val": {
+          "records": 8,
+          "peptide_groups": 8
+        },
+        "test": {
+          "records": 8,
+          "peptide_groups": 8
+        }
+      },
+      "partitions": {
+        "train": {
+          "source": {
+            "name": "train.rtdata",
+            "bytes": 514556,
+            "sha256": "f7e93d9779bb3855087a1b2e09592dda122752d2405027bfdbfbf56a188a46a2",
+            "path": "single_rt/train.rtdata"
+          },
+          "source_records": 14152,
+          "selected_source_indices_zero_based": [
+            8250,
+            7674,
+            7016,
+            7377,
+            10459,
+            1368,
+            11771,
+            11045,
+            11341,
+            4738,
+            12940,
+            12599,
+            5696,
+            2778,
+            160,
+            5498,
+            11373,
+            12552,
+            5630,
+            7850,
+            11150,
+            8361,
+            8663,
+            891,
+            5006,
+            7398,
+            11406,
+            7968,
+            12469,
+            696,
+            756,
+            9814
+          ],
+          "demo": {
+            "name": "train.rtdata",
+            "bytes": 1127,
+            "sha256": "1cf8d713920ef733dcfa0621dedb02fec8a6610ed71bd675eee23695ba83bbc2",
+            "path": "single_rt/train.rtdata"
+          }
+        },
+        "val": {
+          "source": {
+            "name": "val.rtdata",
+            "bytes": 64975,
+            "sha256": "49eacc0de473b327253f2243a12dc0aac7124dc4157e6a1adcefc88777d029c2",
+            "path": "single_rt/val.rtdata"
+          },
+          "source_records": 1791,
+          "selected_source_indices_zero_based": [
+            1175,
+            1191,
+            1075,
+            1594,
+            422,
+            261,
+            1056,
+            1007
+          ],
+          "demo": {
+            "name": "val.rtdata",
+            "bytes": 246,
+            "sha256": "a3c2a5949dd665f561e65f7a620c0a4b7530f62f75b8585bdcc63014ca03ab38",
+            "path": "single_rt/val.rtdata"
+          }
+        },
+        "test": {
+          "source": {
+            "name": "test.rtdata",
+            "bytes": 62531,
+            "sha256": "1912fdf08e2c8eee7cb8c42b7429f824f516609305763478f8e3f83ce91a0261",
+            "path": "single_rt/test.rtdata"
+          },
+          "source_records": 1769,
+          "selected_source_indices_zero_based": [
+            84,
+            440,
+            762,
+            1729,
+            1331,
+            88,
+            1709,
+            1606
+          ],
+          "demo": {
+            "name": "test.rtdata",
+            "bytes": 357,
+            "sha256": "7bb7d62902241311b183fbd456992afa016d4b91cd7ecbc59dd05cdcce7282d6",
+            "path": "single_rt/test.rtdata"
+          }
+        }
+      }
+    },
+    "crosslink_rt": {
+      "splits": {
+        "train": {
+          "records": 32,
+          "peptide_groups": 32
+        },
+        "val": {
+          "records": 8,
+          "peptide_groups": 8
+        },
+        "test": {
+          "records": 8,
+          "peptide_groups": 8
+        }
+      },
+      "partitions": {
+        "train": {
+          "source": {
+            "name": "train.rtdata",
+            "bytes": 402897,
+            "sha256": "2eaba112658e286f1ec971643197088f932f5c3f64a268b99c5c39a61d14be26",
+            "path": "crosslink_rt/train.rtdata"
+          },
+          "source_records": 7699,
+          "selected_source_indices_zero_based": [
+            4189,
+            161,
+            4741,
+            6733,
+            153,
+            7053,
+            5220,
+            2119,
+            6874,
+            133,
+            6781,
+            1572,
+            1637,
+            1262,
+            2329,
+            1925,
+            2192,
+            1370,
+            4025,
+            7376,
+            5102,
+            1259,
+            4753,
+            2686,
+            1032,
+            3251,
+            2105,
+            3097,
+            7084,
+            3040,
+            5987,
+            587
+          ],
+          "demo": {
+            "name": "train.rtdata",
+            "bytes": 1763,
+            "sha256": "08bea4a91c61d78efdf807c887059ee0490aa5f9d28b215d47b1f431e4db6394",
+            "path": "crosslink_rt/train.rtdata"
+          }
+        },
+        "val": {
+          "source": {
+            "name": "val.rtdata",
+            "bytes": 48872,
+            "sha256": "8d7dde65585bf74a2228fd42af0838c4ed22235627bb6b45e3919092027c1f46",
+            "path": "crosslink_rt/val.rtdata"
+          },
+          "source_records": 946,
+          "selected_source_indices_zero_based": [
+            916,
+            418,
+            686,
+            939,
+            723,
+            624,
+            308,
+            730
+          ],
+          "demo": {
+            "name": "val.rtdata",
+            "bytes": 555,
+            "sha256": "3005abc18253fe81e5604c39e2e87e9ea22daab2f10c83ce821cb58dd3689738",
+            "path": "crosslink_rt/val.rtdata"
+          }
+        },
+        "test": {
+          "source": {
+            "name": "test.rtdata",
+            "bytes": 48124,
+            "sha256": "356b829832a15233581a206fed526cbeb9d65d337e8b89a6283655b66ace3eae",
+            "path": "crosslink_rt/test.rtdata"
+          },
+          "source_records": 941,
+          "selected_source_indices_zero_based": [
+            8,
+            528,
+            311,
+            911,
+            388,
+            222,
+            89,
+            389
+          ],
+          "demo": {
+            "name": "test.rtdata",
+            "bytes": 363,
+            "sha256": "aef33e0cc0e2ebc44962cebbb8844b78068863b9d560cc476d237ca666c33cd3",
+            "path": "crosslink_rt/test.rtdata"
+          }
+        }
+      }
+    },
+    "ms2": {
+      "splits": {
+        "train": {
+          "records": 32,
+          "peptide_groups": 32
+        },
+        "val": {
+          "records": 8,
+          "peptide_groups": 8
+        },
+        "test": {
+          "records": 8,
+          "peptide_groups": 8
+        }
+      },
+      "partitions": {
+        "train": {
+          "source": {
+            "name": "train.mgf",
+            "bytes": 71412936,
+            "sha256": "bd659c0de6c44a3ca508a1ac7c1e1088f92276c7198ed2a881ea5908ad3749ca",
+            "path": "ms2/train.mgf"
+          },
+          "source_records": 7524,
+          "selected_source_indices_zero_based": [
+            7381,
+            4432,
+            6497,
+            4012,
+            6485,
+            3367,
+            1507,
+            3812,
+            1462,
+            708,
+            5635,
+            6558,
+            7361,
+            7256,
+            1907,
+            6111,
+            3478,
+            3251,
+            1636,
+            3843,
+            4539,
+            5098,
+            1996,
+            5114,
+            3236,
+            7505,
+            7114,
+            4563,
+            5723,
+            856,
+            3696,
+            5521
+          ],
+          "demo": {
+            "name": "train.mgf",
+            "bytes": 287996,
+            "sha256": "3b8794fa4171462fa6d0c9817e7643b9ef533370c1526898689be0468dd67462",
+            "path": "ms2/train.mgf"
+          }
+        },
+        "val": {
+          "source": {
+            "name": "val.mgf",
+            "bytes": 9462557,
+            "sha256": "c2f7e46ae362bc33a8e916056b5c35bd11bcbd176b2be46872620358dbb2a9c8",
+            "path": "ms2/val.mgf"
+          },
+          "source_records": 995,
+          "selected_source_indices_zero_based": [
+            257,
+            899,
+            194,
+            762,
+            607,
+            438,
+            589,
+            744
+          ],
+          "demo": {
+            "name": "val.mgf",
+            "bytes": 86350,
+            "sha256": "d609698e37ca8ea7671c6f79c490230d819a7374a5219f656b8e3147b7cacce1",
+            "path": "ms2/val.mgf"
+          }
+        },
+        "test": {
+          "source": {
+            "name": "test.mgf",
+            "bytes": 8865238,
+            "sha256": "573197ff4a74fedd85dd686bf2143e1d021fe9d3d5e0e5c8a9573b9e498672ed",
+            "path": "ms2/test.mgf"
+          },
+          "source_records": 936,
+          "selected_source_indices_zero_based": [
+            498,
+            376,
+            395,
+            139,
+            508,
+            722,
+            104,
+            343
+          ],
+          "demo": {
+            "name": "test.mgf",
+            "bytes": 84187,
+            "sha256": "6b803fc14cf1fe50fc7dcb7f89652d5fc338fa757fa354471d29326531dbe826",
+            "path": "ms2/test.mgf"
+          }
+        }
+      }
+    }
+  }
+}

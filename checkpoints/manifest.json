@@ -1,0 +1,91 @@
+{
+  "format": "ppred_release_bundle_v1",
+  "role": "task-specific adapted checkpoints for inference and further finetuning",
+  "checkpoints": {
+    "single_rt": {
+      "name": "single_rt.pth",
+      "bytes": 26297483,
+      "sha256": "fc765e91edb8e1e73527e915645756901009d30aeda73762a174f717b38eb923",
+      "path": "checkpoints/single_rt.pth",
+      "task": "single_rt",
+      "target_dataset": "FAIMS_DSSO linear-peptide RT",
+      "selected_epoch": 2,
+      "normalization": {
+        "minimum": 16.6,
+        "maximum": 170.3,
+        "fit_split": "train",
+        "unit": "source_units"
+      },
+      "architecture": {
+        "num_layer": 10,
+        "emb_dim": 300,
+        "JK": "last",
+        "graph_pooling": "attention",
+        "gnn_type": "gin",
+        "drop_ratio": 0.5
+      },
+      "source_experiment": "ppred_finetune/outputs/full_finetune_eval_20261116_v1/single_rt/best.pth",
+      "source_test_metrics": {
+        "mse": 0.0023987535871628518,
+        "mae": 4.691739978653487
+      }
+    },
+    "crosslink_rt": {
+      "name": "crosslink_rt.pth",
+      "bytes": 26297483,
+      "sha256": "8885e15091daa1f5d27c4425656513983f88b8253e5cfe8fa385ea32ea9a6eb2",
+      "path": "checkpoints/crosslink_rt.pth",
+      "task": "crosslink_rt",
+      "target_dataset": "FAIMS_DSSO crosslinked-peptide RT",
+      "selected_epoch": 5,
+      "normalization": {
+        "minimum": 17.97,
+        "maximum": 161.2,
+        "fit_split": "train",
+        "unit": "source_units"
+      },
+      "architecture": {
+        "num_layer": 10,
+        "emb_dim": 300,
+        "JK": "last",
+        "graph_pooling": "attention",
+        "gnn_type": "gin",
+        "drop_ratio": 0.5
+      },
+      "source_experiment": "ppred_finetune/outputs/full_finetune_eval_20261116_v1/crosslink_rt/best.pth",
+      "source_test_metrics": {
+        "mse": 0.0013079149925667598,
+        "mae": 3.6371039179600895
+      }
+    },
+    "ms2": {
+      "name": "ms2.pth",
+      "bytes": 40089713,
+      "sha256": "418f44708cc3be91d8e93590870b5710969bbec1eedb3e324cf0feba158afb42",
+      "path": "checkpoints/ms2.pth",
+      "task": "ms2",
+      "target_dataset": "ENE[C] single-peptide MS2; QE HCD-FT NCE27",
+      "selected_epoch": 5,
+      "normalization": null,
+      "architecture": {
+        "num_layer": 10,
+        "emb_dim": 64,
+        "JK": "last",
+        "graph_pooling": "attention",
+        "gnn_type": "gin",
+        "drop_ratio": 0.3,
+        "hidden": 256,
+        "nlayers": 4,
+        "num_modloss_types": 4,
+        "num_frag_types": 8,
+        "mask_modloss": false,
+        "dropout": 0.1
+      },
+      "source_experiment": "ppred_finetune/outputs/full_finetune_eval_20261116_v1/ms2/best.pth",
+      "source_test_metrics": {
+        "mse": 0.002081951130785248,
+        "mean_cosine": 0.8708111628985558
+      }
+    }
+  }
+}

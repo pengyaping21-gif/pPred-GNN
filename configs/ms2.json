@@ -1,0 +1,12 @@
+{
+  "task": "ms2",
+  "batch_size": 8,
+  "cpu_threads": 2,
+  "seed": 2024,
+  "lr": 1e-05,
+  "weight_decay": 0.01,
+  "rt_normalization": "auto",
+  "train": "demo/ms2/train.mgf",
+  "val": "demo/ms2/val.mgf",
+  "test": "demo/ms2/test.mgf"
+}

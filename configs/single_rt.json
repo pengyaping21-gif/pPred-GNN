@@ -1,0 +1,12 @@
+{
+  "task": "single_rt",
+  "batch_size": 8,
+  "cpu_threads": 2,
+  "seed": 2024,
+  "lr": 1e-05,
+  "weight_decay": 0.01,
+  "rt_normalization": "auto",
+  "train": "demo/single_rt/train.rtdata",
+  "val": "demo/single_rt/val.rtdata",
+  "test": "demo/single_rt/test.rtdata"
+}
